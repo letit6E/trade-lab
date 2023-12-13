@@ -3,13 +3,18 @@
 
 using namespace std;
 
-static const char *const HEADER = "\nDivider © 2018 Monkey Claps Inc.\n\n";
-static const char *const USAGE = "Usage:\n\tdivider <numerator> <denominator>\n\nDescription:\n\tComputes the result of a fractional division,\n\tand reports both the result and the remainder.\n";
+static const char *const HEADER = "\nTrade-lab © 2023 Rustam Shangareev.\n\n";
+static const char *const USAGE = "Usage:\n\ttrade-lab <data>\n\nDescription:\n\tCreates the trade class,\n\tand reports its inside\n";
 
 int main(int argc, const char* argv[]) {
+    if (argc != 2) {
+        printf("%s%s", HEADER, USAGE);
+        return 0;
+    }
+
     Trade trade;
 
-    std::istringstream iss("1618920000,100.5,10,1005,1\n");
+    std::istringstream iss(argv[1]);
     iss >> trade;
 
     std::cout << trade << std::endl;

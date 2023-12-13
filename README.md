@@ -16,24 +16,14 @@ High-performance tool for analyzing data from exchanges
 
 ```bash
 ❯ bin/divider_tests
-[==========] Running 5 tests from 1 test case.
-[----------] Global test environment set-up.
-[----------] 5 tests from DividerTest
-[ RUN      ] DividerTest.5_DivideBy_2
-[       OK ] DividerTest.5_DivideBy_2 (1 ms)
-[ RUN      ] DividerTest.9_DivideBy_3
-[       OK ] DividerTest.9_DivideBy_3 (0 ms)
-[ RUN      ] DividerTest.17_DivideBy_19
-[       OK ] DividerTest.17_DivideBy_19 (0 ms)
-[ RUN      ] DividerTest.Long_DivideBy_Long
-[       OK ] DividerTest.Long_DivideBy_Long (0 ms)
-[ RUN      ] DividerTest.DivisionByZero
-[       OK ] DividerTest.DivisionByZero (0 ms)
-[----------] 5 tests from DividerTest (1 ms total)
+
+[ RUN      ] TradeTests.TestOne
+[       OK ] TradeTests.TestOne (0 ms)
+[----------] 1 test from TradeTests (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 5 tests from 1 test case ran. (1 ms total)
-[  PASSED  ] 5 tests.
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
 ```
 
 ## Running the CLI Executable
