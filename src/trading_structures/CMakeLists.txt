@@ -1,0 +1,3 @@
+project(trading-structures)
+
+add_library(trading-structures trade.cpp trade.h)
