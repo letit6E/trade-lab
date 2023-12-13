@@ -1,12 +1,14 @@
 add_subdirectory(lib/googletest)
 
+add_definitions(-DRESOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/resources/")
+
 enable_testing()
 
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
-add_executable(trade_tests main.cpp src/trade_tests.cpp)
+add_executable(tests main.cpp src/trade_tests.cpp)
 
-target_link_libraries(trade_tests gtest gtest_main trading-structures)
+target_link_libraries(tests gtest gtest_main trading-structures)
 
-add_test(NAME AllTestsInTradeTests COMMAND trade_tests)
+add_test(NAME AllTests COMMAND tests)
 

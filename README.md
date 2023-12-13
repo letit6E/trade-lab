@@ -43,7 +43,7 @@ Description:
         and reports its inside
 ```
 
-But with arguments, it computes as expected the denominator:
+But with arguments, it executes:
 
 ```bash
 ❯ bin/trade-lab 1618920000,100.5,10,1005,1
