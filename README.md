@@ -33,24 +33,21 @@ Without arguments, it prints out its usage:
 ```bash
 ❯ bin/divider
 
-Divider © 2018 Monkey Claps Inc.
+Trade-lab © 2023 Rustam Shangareev.
 
 Usage:
-	divider <numerator> <denominator>
+        trade-lab <data>
 
 Description:
-	Computes the result of a fractional division,
-	and reports both the result and the remainder.
+        Creates the trade class,
+        and reports its inside
 ```
 
 But with arguments, it computes as expected the denominator:
 
 ```bash
-❯ bin/divider 112443477 12309324
+❯ bin/trade-lab 1618920000,100.5,10,1005,1
 
-Divider © 2018 Monkey Claps Inc.
-
-Division : 112443477 / 12309324 = 9
-Remainder: 112443477 % 12309324 = 1659561
+1618920000,100.5,10,1005,1
 ```
 
