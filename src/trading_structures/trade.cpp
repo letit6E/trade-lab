@@ -9,10 +9,13 @@ std::istream &operator>>(std::istream &is, Trade &tr) {
     std::istringstream iss(line);
     char sep;
 
-    iss >> tr.timestamp >> sep
+    if (!(iss >> tr.timestamp >> sep
         >> tr.price >> sep
+        >> tr.size >> sep
         >> tr.volume >> sep
-        >> tr.direction;
+        >> tr.direction)) {
+        is.setstate(std::ios::failbit);
+    }
 
     return is;
 }

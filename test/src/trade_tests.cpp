@@ -76,7 +76,7 @@ TEST(TradeTest, InputOperator) {
 }
 
 TEST(TradeTest, InputOperatorWithBadData) {
-    std::istringstream is("1618920000;100.5;10;1005;1");
+    std::istringstream is("1618920000;100.5;10;1005");
     Trade trade;
     is >> trade;
     EXPECT_TRUE(is.fail());
