@@ -17,8 +17,12 @@ std::vector<Trade> read_from_file(const std::string& filename) {
     return trades;
 }
 
+std::string get_path(const std::string& file_name) {
+    return std::string(RESOURCE_DIR) + file_name;
+}
+
 TEST(TradeTest, ReadFromFileCorrectData) {
-    std::vector<Trade> trades = read_from_file(std::string(RESOURCE_DIR) + "test_data.csv");
+    std::vector<Trade> trades = read_from_file(get_path("test_data.csv"));
 
     ASSERT_EQ(trades.size(), 2);
 
@@ -36,7 +40,7 @@ TEST(TradeTest, ReadFromFileCorrectData) {
 }
 
 TEST(TradeTest, ReadFromFileIncorrectData) {
-    std::vector<Trade> trades = read_from_file(std::string(RESOURCE_DIR) + "resources/bad_data.csv");
+    std::vector<Trade> trades = read_from_file(get_path("bad_data.csv"));
 
     EXPECT_TRUE(trades.empty());
 }
