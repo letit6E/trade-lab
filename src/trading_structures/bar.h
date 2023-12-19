@@ -9,6 +9,8 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <cfloat>
+#include <algorithm>
 #include "trade.h"
 
 class Bar {
@@ -42,7 +44,7 @@ public:
         price_volume_sum = vw * len;
     }
 
-    Bar() : Bar(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) {};
+    Bar() : Bar(-1., -1., -1., DBL_MAX, 0, 0, 0, 0, 0, 0, 0, -1., -1., 0, 0) {};
 
     explicit Bar(const std::vector<Trade> &trades);
 
@@ -79,6 +81,8 @@ public:
     long long get_duration() const { return duration; }
 
     unsigned int get_length() const { return length; }
+
+    void add_trade(const Trade& trade);
 };
 
 

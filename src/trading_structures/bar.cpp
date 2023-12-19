@@ -51,7 +51,7 @@ std::ostream &operator<<(std::ostream &out, const Bar &bar) {
     return out;
 }
 
-Bar::Bar(const std::vector<Trade> &trades) {
+Bar::Bar(const std::vector<Trade> &trades) : Bar() {
     if (trades.empty()) {
         throw std::invalid_argument("Trades list cannot be empty");
     }
@@ -59,47 +59,41 @@ Bar::Bar(const std::vector<Trade> &trades) {
     auto timestamp_comp = [](const Trade &a, const Trade &b) {
         return a.timestamp <= b.timestamp;
     };
-
     if (!std::is_sorted(trades.begin(), trades.end(), timestamp_comp)) {
         throw std::invalid_argument("Trades list must be sorted by timestamp");
     }
 
-    auto price_comp = [](const Trade &a, const Trade &b) {
-        return a.price < b.price;
-    };
-
-    open = trades.front().price;
-    close = trades.back().price;
-    high = std::max_element(trades.begin(), trades.end(), price_comp)->price;
-    low = std::min_element(trades.begin(), trades.end(), price_comp)->price;
-    volume = 0.0;
-    size = 0.0;
-    signed_volume = 0.0;
-    signed_size = 0.0;
-    directed_volume = 0.0;
-    directed_size = 0.0;
-    price_volume_sum = 0.0;
-
-    double last_price = -1;
     for (const Trade &trade: trades) {
-        volume += trade.volume;
-        size += trade.size;
-        price_volume_sum += trade.price * trade.volume;
+        add_trade(trade);
+    }
+}
 
-        directed_volume += trade.direction * trade.volume;
-        directed_size += trade.direction * trade.size;
-
-        if (last_price >= 0 && trade.price != last_price) {
-            int sign = (trade.price > last_price) ? 1 : -1;
-            signed_volume += sign * trade.volume;
-            signed_size += sign * trade.size;
-        }
-        last_price = trade.price;
+void Bar::add_trade(const Trade &trade) {
+    if (trade.timestamp < stopstamp) {
+        throw std::invalid_argument("Trade must be completed later than last trade in bar");
     }
 
-    length = trades.size();
+    if (close >= 0 && trade.price != close) {
+        int sign = (trade.price > close) ? 1 : -1;
+        signed_volume += sign * trade.volume;
+        signed_size += sign * trade.size;
+    }
+    if (open < 0) {
+        open = trade.price;
+    }
+    close = trade.price;
+    volume += trade.volume;
+    size += trade.size;
+    price_volume_sum += trade.price * trade.volume;
+    directed_volume += trade.direction * trade.volume;
+    directed_size += trade.direction * trade.size;
+    high = std::max(high, trade.price);
+    low = std::min(low, trade.price);
+    ++length;
     vwap = price_volume_sum / length;
-    startstamp = trades.front().timestamp;
-    stopstamp = trades.back().timestamp;
+    if (startstamp < 0) {
+        startstamp = trade.timestamp;
+    }
+    stopstamp = trade.timestamp;
     duration = stopstamp - startstamp;
 }
