@@ -14,7 +14,9 @@ protected:
 
 public:
 
-    virtual void receive(const Trade &trade);
+    virtual void receive(const Trade &trade) {
+        throw std::logic_error("This is abstract method and not implemented");
+    }
 
     virtual bool ready() {
         return !bar_queue.empty();
