@@ -10,27 +10,21 @@
 
 class BarAggregator {
 private:
-    std::queue<Bar> closedBars;
-    Bar currentBar;
-    unsigned long barStep;
+    std::queue<Bar> bar_queue;
 
 public:
 
-    explicit BarAggregator(long long step) : closedBars(), currentBar(), barStep(step) {}
-
-    void receive(const Trade& t) {
-        // TODO
-    }
+    virtual void receive(const Trade &trade);
 
     bool ready() {
-        return !closedBars.empty();
+        return !bar_queue.empty();
     }
 
     Bar publish() {
         if (ready()) {
-            Bar publishedBar = closedBars.front();
-            closedBars.pop();
-            return publishedBar;
+            Bar published_bar = bar_queue.front();
+            bar_queue.pop();
+            return published_bar;
         } else {
             throw std::runtime_error("There are no ready bars to publish.");
         }
