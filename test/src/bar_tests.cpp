@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "trading_structures/bar.h"
+#include "trading-structures/bar.h"
 #include <sstream>
 
 TEST(BarTest, ConstructorTest) {
@@ -59,7 +59,7 @@ TEST(BarTest, OutputOperatorTest) {
     EXPECT_EQ(expectedResult, oss.str());
 }
 
-TEST(BarConstructorTest, AggregatesTradeDataCorrectly) {
+TEST(BarTest, AggregatesTradeDataCorrectly) {
     std::vector<Trade> trades = {
             {1617283500, 10.0, 5, 500, 1},
             {1617283600, 11.0, 3, 330, 1},

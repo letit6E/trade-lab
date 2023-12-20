@@ -1,7 +1,7 @@
 //
 // Created by letit6E on 03.12.2023.
 //
-#include <trading_structures/trade.h>
+#include <trading-structures/trade.h>
 #include <fstream>
 #include "gtest/gtest.h"
 
