@@ -5,6 +5,15 @@
 #include <gtest/gtest.h>
 #include "bar-aggregators/tick_aggregator.h"
 
+TEST(TickBarAggregatorTest, ReceiveTradeWithEarlierTimestamp) {
+    TickBarAggregator aggregator(1000);
+    Trade trade1(1000, 10.0, 1.0, 1.0, 1);
+    Trade trade2(500, 11.0, 2.0, 2.0, -1);
+
+    aggregator.receive(trade1);
+    EXPECT_THROW(aggregator.receive(trade2), std::invalid_argument);
+}
+
 // Тестирование функции receive()
 TEST(TickBarAggregatorTest, ReceiveTrade) {
     TickBarAggregator aggregator(5); // Создаем агрегатор с длиной бара 5
