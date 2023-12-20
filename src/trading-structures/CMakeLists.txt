@@ -6,5 +6,5 @@ add_library(trading-structures trade.cpp trade.h
         bar_aggregator.h
 )
 
-target_include_directories(trading-structures PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
+target_include_directories(trading-structures SYSTEM PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR})

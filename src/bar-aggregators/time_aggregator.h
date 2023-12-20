@@ -10,13 +10,14 @@
 class TimeBarAggregator : public BarAggregator {
 private:
     long long bar_duration;
+    long long last_timestamp;
     Bar cur_bar;
     Bar last_bar;
 
 public:
-    explicit TimeBarAggregator(long long duration) : bar_duration(duration) {}
+    explicit TimeBarAggregator(long long duration) : bar_duration(duration), last_timestamp(-1) {}
 
-    void receive(const Trade& trade) override;
+    void receive(const Trade &trade) override;
 
     bool ready() override;
 
