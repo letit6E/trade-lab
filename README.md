@@ -16,24 +16,14 @@ High-performance tool for analyzing data from exchanges
 
 ```bash
 ❯ bin/divider_tests
-[==========] Running 5 tests from 1 test case.
-[----------] Global test environment set-up.
-[----------] 5 tests from DividerTest
-[ RUN      ] DividerTest.5_DivideBy_2
-[       OK ] DividerTest.5_DivideBy_2 (1 ms)
-[ RUN      ] DividerTest.9_DivideBy_3
-[       OK ] DividerTest.9_DivideBy_3 (0 ms)
-[ RUN      ] DividerTest.17_DivideBy_19
-[       OK ] DividerTest.17_DivideBy_19 (0 ms)
-[ RUN      ] DividerTest.Long_DivideBy_Long
-[       OK ] DividerTest.Long_DivideBy_Long (0 ms)
-[ RUN      ] DividerTest.DivisionByZero
-[       OK ] DividerTest.DivisionByZero (0 ms)
-[----------] 5 tests from DividerTest (1 ms total)
+
+[ RUN      ] TradeTests.TestOne
+[       OK ] TradeTests.TestOne (0 ms)
+[----------] 1 test from TradeTests (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 5 tests from 1 test case ran. (1 ms total)
-[  PASSED  ] 5 tests.
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
 ```
 
 ## Running the CLI Executable
@@ -43,24 +33,21 @@ Without arguments, it prints out its usage:
 ```bash
 ❯ bin/divider
 
-Divider © 2018 Monkey Claps Inc.
+Trade-lab © 2023 Rustam Shangareev.
 
 Usage:
-	divider <numerator> <denominator>
+        trade-lab <data>
 
 Description:
-	Computes the result of a fractional division,
-	and reports both the result and the remainder.
+        Creates the trade class,
+        and reports its inside
 ```
 
-But with arguments, it computes as expected the denominator:
+But with arguments, it executes:
 
 ```bash
-❯ bin/divider 112443477 12309324
+❯ bin/trade-lab 1618920000,100.5,10,1005,1
 
-Divider © 2018 Monkey Claps Inc.
-
-Division : 112443477 / 12309324 = 9
-Remainder: 112443477 % 12309324 = 1659561
+1618920000,100.5,10,1005,1
 ```
 
