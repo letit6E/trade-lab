@@ -29,7 +29,13 @@ Bar TimeBarAggregator::publish() {
         Bar published_bar = bar_queue.front();
         bar_queue.pop();
         return published_bar;
-    } else {
-        throw std::runtime_error("There are no ready bars to publish.");
     }
+
+    if (cur_bar.get_open() > 0) { // user don't check ready(), force publish cur_bar
+        last_bar = cur_bar;
+        cur_bar = Bar();
+        return last_bar;
+    }
+
+    throw std::runtime_error("There are no ready bars to publish.");
 }

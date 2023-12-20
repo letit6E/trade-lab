@@ -63,5 +63,6 @@ TEST(TimeBarAggregatorTest, PublishWithoutAvailableBar) {
 
     aggregator.receive(trade1);
 
-    EXPECT_THROW(aggregator.publish(), std::runtime_error);
+    EXPECT_FALSE(aggregator.ready());
+    EXPECT_NO_THROW(aggregator.publish());
 }
