@@ -1,5 +1,5 @@
 #include <iostream>
-#include "trading_structures/trade.h"
+#include "trading-structures/trade.h"
 
 using namespace std;
 
