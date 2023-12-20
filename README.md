@@ -15,15 +15,15 @@ High-performance tool for analyzing data from exchanges
 ## Running the tests
 
 ```bash
-❯ bin/divider_tests
+❯ bin/tests
 
-[ RUN      ] TradeTests.TestOne
-[       OK ] TradeTests.TestOne (0 ms)
-[----------] 1 test from TradeTests (0 ms total)
+[==========] Running 20 tests from 4 test suites.
+[----------] Global test environment set-up.
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (0 ms total)
-[  PASSED  ] 1 test.
+[==========] 20 tests from 4 test suites ran. (1 ms total)
+[  PASSED  ] 20 tests.
+
 ```
 
 ## Running the CLI Executable
@@ -31,7 +31,7 @@ High-performance tool for analyzing data from exchanges
 Without arguments, it prints out its usage:
 
 ```bash
-❯ bin/divider
+❯ bin/trade-lab
 
 Trade-lab © 2023 Rustam Shangareev.
 
