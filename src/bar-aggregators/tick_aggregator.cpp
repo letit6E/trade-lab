@@ -8,6 +8,7 @@ void TickBarAggregator::receive(const Trade &trade) {
     if (trade.timestamp < last_timestamp) {
         throw std::invalid_argument("Bar aggregator receives trades only increasing over timestamp");
     }
+    last_timestamp = trade.timestamp;
     if (cur_bar.get_length() == bar_length) {
         bar_queue.push(cur_bar);
         cur_bar = Bar();
