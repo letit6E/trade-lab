@@ -1,0 +1,15 @@
+[submodule "src/lib/rapidcsv"]
+	path=src/lib/rapidcsv
+	url="https://github.com/d99kris/rapidcsv"
+
+[submodule "test/lib/googletest"]
+	path=test/lib/googletest
+	url="https://github.com/google/googletest"
+
+[submodule "src/lib/jsoncpp"]
+	path=src/lib/jsoncpp
+	url="https://github.com/open-source-parsers/jsoncpp"
+
+[submodule "src/lib/websocketpp"]
+	path=src/lib/websocketpp
+	url="https://github.com/zaphoyd/websocketpp"
