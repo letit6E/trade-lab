@@ -14,4 +14,3 @@ add_executable(tests main.cpp src/trade_tests.cpp
 target_link_libraries(tests gtest gtest_main trading-structures bar-aggregators)
 
 add_test(NAME AllTests COMMAND tests)
-
