@@ -6,15 +6,15 @@
 #include <string>
 
 class Trade {
-public:
-    long long timestamp; // Unix timestamp
+   public:
+    long long timestamp;  // Unix timestamp
     double price;
     double size;
     double volume;
     int direction;
 
     Trade(long long t, double p, double s, double v, int d)
-            : timestamp(t), price(p), size(s), volume(v), direction(d) {}
+        : timestamp(t), price(p), size(s), volume(v), direction(d) {}
 
     Trade() : Trade(0, 0, 0, 0, 0) {}
 
@@ -22,5 +22,4 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Trade& tr);
 };
 
-
-#endif //TRADE_LAB_TRADE_H
+#endif  // TRADE_LAB_TRADE_H

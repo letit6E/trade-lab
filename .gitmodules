@@ -1,3 +1,7 @@
+[submodule "src/lib/websocketpp"]
+	path=src/lib/websocketpp
+	url="https://github.com/zaphoyd/websocketpp"
+
 [submodule "src/lib/rapidcsv"]
 	path=src/lib/rapidcsv
 	url="https://github.com/d99kris/rapidcsv"
@@ -10,6 +14,3 @@
 	path=src/lib/jsoncpp
 	url="https://github.com/open-source-parsers/jsoncpp"
 
-[submodule "src/lib/websocketpp"]
-	path=src/lib/websocketpp
-	url="https://github.com/zaphoyd/websocketpp"

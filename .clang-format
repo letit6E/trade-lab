@@ -1,0 +1,19 @@
+BasedOnStyle: Google
+
+IndentWidth: 4
+
+ColumnLimit: 80
+
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+
+AlignAfterOpenBracket: Align
+
+AlignOperands: true
+
+AlignTrailingComments: true
+
+ReflowComments: true
+
+UseTab: Never
+IndentCaseLabels: false

@@ -9,11 +9,8 @@ std::istream &operator>>(std::istream &is, Trade &tr) {
     std::istringstream iss(line);
     char sep;
 
-    if (!(iss >> tr.timestamp >> sep
-        >> tr.price >> sep
-        >> tr.size >> sep
-        >> tr.volume >> sep
-        >> tr.direction)) {
+    if (!(iss >> tr.timestamp >> sep >> tr.price >> sep >> tr.size >> sep >>
+          tr.volume >> sep >> tr.direction)) {
         is.setstate(std::ios::failbit);
     }
 
@@ -23,10 +20,7 @@ std::istream &operator>>(std::istream &is, Trade &tr) {
 std::ostream &operator<<(std::ostream &os, const Trade &tr) {
     char sep = ',';
 
-    os << tr.timestamp << sep
-       << tr.price << sep
-       << tr.size << sep
-       << tr.volume << sep
-       << (tr.direction == 1 ? "1" : "-1");
+    os << tr.timestamp << sep << tr.price << sep << tr.size << sep << tr.volume
+       << sep << (tr.direction == 1 ? "1" : "-1");
     return os;
 }

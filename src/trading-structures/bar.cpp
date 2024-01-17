@@ -7,21 +7,12 @@
 std::istream &operator>>(std::istream &in, Bar &bar) {
     char sep;
 
-    if (!(in >> bar.open >> sep
-       >> bar.close >> sep
-       >> bar.high >> sep
-       >> bar.low >> sep
-       >> bar.volume >> sep
-       >> bar.size >> sep
-       >> bar.signed_volume >> sep
-       >> bar.signed_size >> sep
-       >> bar.directed_volume >> sep
-       >> bar.directed_size >> sep
-       >> bar.vwap >> sep
-       >> bar.startstamp >> sep
-       >> bar.stopstamp >> sep
-       >> bar.duration >> sep
-       >> bar.length)) {
+    if (!(in >> bar.open >> sep >> bar.close >> sep >> bar.high >> sep >>
+          bar.low >> sep >> bar.volume >> sep >> bar.size >> sep >>
+          bar.signed_volume >> sep >> bar.signed_size >> sep >>
+          bar.directed_volume >> sep >> bar.directed_size >> sep >> bar.vwap >>
+          sep >> bar.startstamp >> sep >> bar.stopstamp >> sep >>
+          bar.duration >> sep >> bar.length)) {
         in.setstate(std::ios::failbit);
     }
 
@@ -32,21 +23,11 @@ std::istream &operator>>(std::istream &in, Bar &bar) {
 std::ostream &operator<<(std::ostream &out, const Bar &bar) {
     char sep = ',';
 
-    out << bar.open << sep
-       << bar.close << sep
-       << bar.high << sep
-       << bar.low << sep
-       << bar.volume << sep
-       << bar.size << sep
-       << bar.signed_volume << sep
-       << bar.signed_size << sep
-       << bar.directed_volume << sep
-       << bar.directed_size << sep
-       << bar.vwap << sep
-       << bar.startstamp << sep
-       << bar.stopstamp << sep
-       << bar.duration << sep
-       << bar.length;
+    out << bar.open << sep << bar.close << sep << bar.high << sep << bar.low
+        << sep << bar.volume << sep << bar.size << sep << bar.signed_volume
+        << sep << bar.signed_size << sep << bar.directed_volume << sep
+        << bar.directed_size << sep << bar.vwap << sep << bar.startstamp << sep
+        << bar.stopstamp << sep << bar.duration << sep << bar.length;
 
     return out;
 }
@@ -63,14 +44,15 @@ Bar::Bar(const std::vector<Trade> &trades) : Bar() {
         throw std::invalid_argument("Trades list must be sorted by timestamp");
     }
 
-    for (const Trade &trade: trades) {
+    for (const Trade &trade : trades) {
         add_trade(trade);
     }
 }
 
 void Bar::add_trade(const Trade &trade) {
     if (trade.timestamp < stopstamp) {
-        throw std::invalid_argument("Trade must be completed later than last trade in bar");
+        throw std::invalid_argument(
+            "Trade must be completed later than last trade in bar");
     }
 
     if (close >= 0 && trade.price != close) {

@@ -5,23 +5,21 @@
 #ifndef TRADE_LAB_BAR_AGGREGATOR_H
 #define TRADE_LAB_BAR_AGGREGATOR_H
 
-#include <queue>
 #include <fstream>
+#include <queue>
+
 #include "bar.h"
 
 class BarAggregator {
-protected:
+   protected:
     std::queue<Bar> bar_queue;
 
-public:
-
+   public:
     virtual void receive(const Trade &trade) {
         throw std::logic_error("This is abstract method and not implemented");
     }
 
-    virtual bool ready() {
-        return !bar_queue.empty();
-    }
+    virtual bool ready() { return !bar_queue.empty(); }
 
     virtual Bar publish() {
         if (ready()) {
@@ -33,7 +31,7 @@ public:
         }
     }
 
-    template<typename T>
+    template <typename T>
     static std::queue<Bar> process(const std::string &filepath) {
         std::ifstream file(filepath);
         if (!file.is_open()) {
@@ -60,12 +58,12 @@ public:
         file.close();
 
         try {
-            closed_bars.push(aggregator.publish()); // force push
-        } catch (...) {}
+            closed_bars.push(aggregator.publish());  // force push
+        } catch (...) {
+        }
 
         return closed_bars;
     }
-
 };
 
-#endif //TRADE_LAB_BAR_AGGREGATOR_H
+#endif  // TRADE_LAB_BAR_AGGREGATOR_H

@@ -8,14 +8,15 @@
 #include "bar_aggregator.h"
 
 class TimeBarAggregator : public BarAggregator {
-private:
+   private:
     long long bar_duration;
     long long last_timestamp;
     Bar cur_bar;
     Bar last_bar;
 
-public:
-    explicit TimeBarAggregator(long long duration) : bar_duration(duration), last_timestamp(-1) {}
+   public:
+    explicit TimeBarAggregator(long long duration)
+        : bar_duration(duration), last_timestamp(-1) {}
 
     void receive(const Trade &trade) override;
 
@@ -24,4 +25,4 @@ public:
     Bar publish() override;
 };
 
-#endif //TRADE_LAB_TIME_AGGREGATOR_H
+#endif  // TRADE_LAB_TIME_AGGREGATOR_H

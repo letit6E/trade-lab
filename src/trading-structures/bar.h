@@ -5,46 +5,57 @@
 #ifndef TRADE_LAB_BAR_H
 #define TRADE_LAB_BAR_H
 
+#include <algorithm>
+#include <cfloat>
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <algorithm>
-#include <cfloat>
-#include <algorithm>
+
 #include "trade.h"
 
 class Bar {
-private:
-    double open;               // Open price
-    double close;              // Close price
-    double high;               // Max price
-    double low;                // Min price
-    double volume;             // Trade volumes sum
-    double size;               // Trade sizes sum
-    double signed_volume;      // Signed volumes sum
-    double signed_size;        // Signed sizes sum
-    double directed_volume;    // Signed by direction volumes sum
-    double directed_size;      // Signed by direction sizes sum
-    double vwap;               // Volume weighted average price
-    long long startstamp;      // First trade unix timestamp
-    long long stopstamp;       // Last trade unix timestamp
-    long long duration;        // First and last timestamps duration
-    unsigned int length;       // Number of trades
+   private:
+    double open;             // Open price
+    double close;            // Close price
+    double high;             // Max price
+    double low;              // Min price
+    double volume;           // Trade volumes sum
+    double size;             // Trade sizes sum
+    double signed_volume;    // Signed volumes sum
+    double signed_size;      // Signed sizes sum
+    double directed_volume;  // Signed by direction volumes sum
+    double directed_size;    // Signed by direction sizes sum
+    double vwap;             // Volume weighted average price
+    long long startstamp;    // First trade unix timestamp
+    long long stopstamp;     // Last trade unix timestamp
+    long long duration;      // First and last timestamps duration
+    unsigned int length;     // Number of trades
 
-    double price_volume_sum;   // Volume weighted price
+    double price_volume_sum;  // Volume weighted price
 
-public:
+   public:
     Bar(double o, double c, double h, double l, double vol, double sz,
-        double s_vol, double s_sz, double d_vol, double d_sz, double vw, long long ss, long long es, long long dr,
-        unsigned int len)
-            : open(o), close(c), high(h), low(l), volume(vol), size(sz),
-              signed_volume(s_vol), signed_size(s_sz), directed_volume(d_vol), directed_size(d_sz), vwap(vw),
-              startstamp(ss), stopstamp(es),
-              duration(dr), length(len) {
+        double s_vol, double s_sz, double d_vol, double d_sz, double vw,
+        long long ss, long long es, long long dr, unsigned int len)
+        : open(o),
+          close(c),
+          high(h),
+          low(l),
+          volume(vol),
+          size(sz),
+          signed_volume(s_vol),
+          signed_size(s_sz),
+          directed_volume(d_vol),
+          directed_size(d_sz),
+          vwap(vw),
+          startstamp(ss),
+          stopstamp(es),
+          duration(dr),
+          length(len) {
         price_volume_sum = vw * len;
     }
 
-    Bar() : Bar(-1., -1., -1., DBL_MAX, 0, 0, 0, 0, 0, 0, 0, -1., -1., 0, 0) {};
+    Bar() : Bar(-1., -1., -1., DBL_MAX, 0, 0, 0, 0, 0, 0, 0, -1., -1., 0, 0){};
 
     explicit Bar(const std::vector<Trade> &trades);
 
@@ -82,8 +93,7 @@ public:
 
     unsigned int get_length() const { return length; }
 
-    void add_trade(const Trade& trade);
+    void add_trade(const Trade &trade);
 };
 
-
-#endif //TRADE_LAB_BAR_H
+#endif  // TRADE_LAB_BAR_H
