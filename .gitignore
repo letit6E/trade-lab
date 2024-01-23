@@ -51,5 +51,7 @@ build
 
 include/*
 lib/*
+src/lib/**
+test/lib/**
 bin/*
 test/test_runner
