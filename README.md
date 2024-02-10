@@ -1,53 +1,53 @@
-# Trading tool laboratory
+# Trade-lab
 
-High-performance tool for analyzing data from exchanges
+High-performance tool for analyzing data from exchanges.
 
-## Building Manually
+## Building
 
-```bash
-❯ rm -rf build && mkdir build
-❯ git submodule init && git submodule update
-❯ cd build
-❯ cmake ..
-❯ make && make install
-❯ cd ..
-```
-## Running the tests
-
-```bash
-❯ bin/tests
-
-[==========] Running 20 tests from 4 test suites.
-[----------] Global test environment set-up.
-
-[----------] Global test environment tear-down
-[==========] 20 tests from 4 test suites ran. (1 ms total)
-[  PASSED  ] 20 tests.
+To build this project, follow these steps:
 
 ```
-
-## Running the CLI Executable
-
-Without arguments, it prints out its usage:
-
-```bash
-❯ bin/trade-lab
-
-Trade-lab © 2023 Rustam Shangareev.
-
-Usage:
-        trade-lab <data>
-
-Description:
-        Creates the trade class,
-        and reports its inside
+rm -rf build && mkdir build
+git submodule init && git submodule update
+cd build
+cmake ..
+make && make install
+cd ..
 ```
 
-But with arguments, it executes:
+## Running Tests
 
-```bash
-❯ bin/trade-lab 1618920000,100.5,10,1005,1
+After building, you can run the tests:
 
-1618920000,100.5,10,1005,1
+```
+./bin/tests
 ```
 
+## Running the application
+
+You can run the application:
+
+```
+./bin/trade-lab
+```
+
+## Debugging and Coverage
+
+For debugging purposes, you can build with debug information using:
+
+```
+rm -rf build && mkdir build
+git submodule init && git submodule update
+cd build
+cmake ..
+make && make install
+cd ..
+```
+
+To check test coverage, use:
+
+```
+make trade-lab_coverage
+```
+
+The coverage result will be available in `build/coverage`.
