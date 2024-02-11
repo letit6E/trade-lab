@@ -39,10 +39,7 @@ void Exchange::init_webSocket(std::string const &host, std::string const &port,
 
 void Exchange::read_Socket() { ws.read(buffer); }
 
-bool Exchange::is_socket_open() {
-    if (ws.is_open()) return true;
-    return false;
-}
+bool Exchange::is_socket_open() { return ws.is_open(); }
 
 void Exchange::write_Socket(const std::string &text) {
     ws.write(net::buffer(text));
