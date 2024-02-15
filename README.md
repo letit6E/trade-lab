@@ -39,7 +39,7 @@ For debugging purposes, you can build with debug information using:
 rm -rf build && mkdir build
 git submodule init && git submodule update
 cd build
-cmake ..
+cmake -DCMAKE_BUILD_TYPE=Debug ..
 make && make install
 cd ..
 ```
