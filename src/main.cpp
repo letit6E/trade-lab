@@ -11,7 +11,7 @@ int main() {
         if (bybit.is_socket_open()) {
             std::string subscription_message =
                 R"({"op": "subscribe", "args":
-                    ["orderbook.50.BTCUSDT"]})";
+                        ["orderbook.50.BTCUSDT"]})";
             bybit.write_Socket(subscription_message);
         }
         while (true) {
