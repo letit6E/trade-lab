@@ -45,8 +45,10 @@ void Exchange::write_Socket(const std::string &text) {
     ws.write(net::buffer(text));
 }
 
-std::string Exchange::get_socket_data() {
-    return beast::buffers_to_string(buffer.data());
+Json::Value Exchange::get_socket_data() {
+    Json::Value result;
+    std::stringstream(beast::buffers_to_string(buffer.data())) >> result;
+    return result;
 }
 
 void Exchange::buffer_clear() { buffer.clear(); }

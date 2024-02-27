@@ -10,6 +10,8 @@
 #include <boost/beast.hpp>
 #include <boost/beast/ssl.hpp>
 
+#include "json/json.h"
+
 namespace net = boost::asio;
 namespace ssl = net::ssl;
 namespace beast = boost::beast;
@@ -35,7 +37,7 @@ class Exchange {
 
     void write_Socket(const std::string &text);
 
-    std::string get_socket_data();
+    Json::Value get_socket_data();
 
     void buffer_clear();
 
