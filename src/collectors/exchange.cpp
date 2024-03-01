@@ -45,9 +45,9 @@ void Exchange::write_Socket(const std::string &text) {
     ws.write(net::buffer(text));
 }
 
-Json::Value Exchange::get_socket_data() {
-    Json::Value result;
-    std::stringstream(beast::buffers_to_string(buffer.data())) >> result;
+simdjson::dom::element Exchange::get_socket_data() {
+    simdjson::dom::element result =
+        parser_json.parse(beast::buffers_to_string(buffer.data()));
     return result;
 }
 

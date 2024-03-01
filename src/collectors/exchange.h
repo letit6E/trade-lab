@@ -10,7 +10,7 @@
 #include <boost/beast.hpp>
 #include <boost/beast/ssl.hpp>
 
-#include "json/json.h"
+#include "simdjson.h"
 
 namespace net = boost::asio;
 namespace ssl = net::ssl;
@@ -37,13 +37,14 @@ class Exchange {
 
     void write_Socket(const std::string &text);
 
-    Json::Value get_socket_data();
+    simdjson::dom::element get_socket_data();
 
     void buffer_clear();
 
     void webSocket_close();
 
    private:
+    simdjson::dom::parser parser_json;
     std::string m_name;
     net::io_context ioc;
     ssl::context ctx{ssl::context::tlsv12_client};

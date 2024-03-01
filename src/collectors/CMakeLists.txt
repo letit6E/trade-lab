@@ -13,7 +13,7 @@ target_link_libraries(collectors
         tomcrypt
         crypto
         crypt
-        jsoncpp_lib
+        simdjson
 )
 
 find_package(Boost REQUIRED COMPONENTS program_options)
