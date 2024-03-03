@@ -14,6 +14,7 @@ target_link_libraries(collectors
         crypto
         crypt
         simdjson
+        trading-structures
 )
 
 find_package(Boost REQUIRED COMPONENTS program_options)
