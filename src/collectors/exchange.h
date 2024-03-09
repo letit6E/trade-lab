@@ -11,6 +11,7 @@
 #include <boost/beast/ssl.hpp>
 
 #include "simdjson.h"
+#include "trade.h"
 
 namespace net = boost::asio;
 namespace ssl = net::ssl;
@@ -39,11 +40,17 @@ class Exchange {
 
     simdjson::dom::element get_socket_data();
 
+    std::vector<Trade> get_socket_trades();
+
     void buffer_clear();
 
     void webSocket_close();
 
    private:
+    void add_socket_trades(simdjson::dom::element json, std::vector<Trade> &vec,
+                           int direction, int64_t timestamp);
+
+    std::unordered_map<std::string, double> bid_buffer, ask_buffer;
     simdjson::dom::parser parser_json;
     std::string m_name;
     net::io_context ioc;

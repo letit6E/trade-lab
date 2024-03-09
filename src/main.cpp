@@ -16,12 +16,15 @@ int main() {
         }
         while (true) {
             bybit.read_Socket();
-            std::cout << bybit.get_socket_data() << std::endl;
+            auto vec = bybit.get_socket_trades();
+            for (const auto& tr : vec) {
+                std::cout << tr << std::endl;
+            }
 
             bybit.buffer_clear();
         }
         bybit.webSocket_close();
-    } catch (std::exception const &e) {
+    } catch (std::exception const& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return 1;
     }
