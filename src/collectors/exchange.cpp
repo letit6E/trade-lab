@@ -66,16 +66,19 @@ void Exchange::add_socket_trades(simdjson::dom::element json,
         double new_size = std::stod(record_data[1]);
 
         if (bid_buffer.find(price) == bid_buffer.cend()) {
-            bid_buffer[price] = new_size;
+            if (new_size > 0.0) bid_buffer[price] = new_size;
             continue;
         }
 
         double diff_size = bid_buffer[price] - new_size;
-
         if (new_size == 0.0) {
             bid_buffer.erase(price);
         } else {
             bid_buffer[price] = new_size;
+        }
+
+        if (diff_size < 0.0) {
+            continue;
         }
 
         double trade_price = std::stod(price), trade_size = diff_size,
@@ -99,4 +102,4 @@ std::vector<Trade> Exchange::get_socket_trades() {
 
 void Exchange::buffer_clear() { buffer.clear(); }
 
-void Exchange::webSocket_close() { ws.close(websocket::close_code::none); }
+void Exchange::webSocket_close() { ws.close(websocket::close_code::normal); }
