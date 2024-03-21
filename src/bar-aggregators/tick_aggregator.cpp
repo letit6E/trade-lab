@@ -4,6 +4,9 @@
 
 #include "tick_aggregator.h"
 
+TickBarAggregator::TickBarAggregator(long long bar_length)
+    : bar_length(bar_length), last_timestamp(-1) {}
+
 void TickBarAggregator::receive(const Trade &trade) {
     if (trade.timestamp < last_timestamp) {
         throw std::invalid_argument(

@@ -14,8 +14,7 @@ class TickBarAggregator : public BarAggregator {
     Bar cur_bar;
 
    public:
-    explicit TickBarAggregator(long long bar_length)
-        : bar_length(bar_length), last_timestamp(-1) {}
+    explicit TickBarAggregator(long long bar_length);
 
     void receive(const Trade &trade) override;
 
