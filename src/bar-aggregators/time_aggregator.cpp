@@ -4,6 +4,9 @@
 
 #include "time_aggregator.h"
 
+TimeBarAggregator::TimeBarAggregator(long long duration)
+    : bar_duration(duration), last_timestamp(-1) {}
+
 void TimeBarAggregator::receive(const Trade &trade) {
     if (trade.timestamp < last_timestamp) {
         throw std::invalid_argument(
