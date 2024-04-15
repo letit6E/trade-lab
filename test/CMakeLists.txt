@@ -10,8 +10,9 @@ add_executable(tests main.cpp src/trade_tests.cpp
         src/bar_tests.cpp
         src/time_aggregator_tests.cpp
         src/tick_aggregator_tests.cpp
-        src/volume_aggregator_tests.cpp)
+        src/volume_aggregator_tests.cpp
+        src/finmetrics_calculator_tests.cpp)
 
-target_link_libraries(tests gtest gtest_main trading-structures bar-aggregators)
+target_link_libraries(tests gtest gtest_main trading-structures bar-aggregators analysis)
 
 add_test(NAME AllTests COMMAND tests)
