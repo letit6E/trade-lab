@@ -36,64 +36,46 @@ class Bar {
    public:
     Bar(double o, double c, double h, double l, double vol, double sz,
         double s_vol, double s_sz, double d_vol, double d_sz, double vw,
-        long long ss, long long es, long long dr, unsigned int len)
-        : open(o),
-          close(c),
-          high(h),
-          low(l),
-          volume(vol),
-          size(sz),
-          signed_volume(s_vol),
-          signed_size(s_sz),
-          directed_volume(d_vol),
-          directed_size(d_sz),
-          vwap(vw),
-          startstamp(ss),
-          stopstamp(es),
-          duration(dr),
-          length(len) {
-        price_volume_sum = vw * len;
-    }
+        long long ss, long long es, long long dr, unsigned int len);
 
-    Bar() : Bar(-1., -1., -1., DBL_MAX, 0, 0, 0, 0, 0, 0, 0, -1., -1., 0, 0){};
+    Bar();
 
-    explicit Bar(const std::vector<Trade> &trades);
+    explicit Bar(const std::vector<Trade>& trades);
 
-    friend std::istream &operator>>(std::istream &is, Bar &bar);
+    friend std::istream& operator>>(std::istream& is, Bar& bar);
 
-    friend std::ostream &operator<<(std::ostream &os, const Bar &bar);
+    friend std::ostream& operator<<(std::ostream& os, const Bar& bar);
 
-    double get_open() const { return open; }
+    double get_open() const;
 
-    double get_close() const { return close; }
+    double get_close() const;
+    double get_high() const;
 
-    double get_high() const { return high; }
+    double get_low() const;
 
-    double get_low() const { return low; }
+    double get_volume() const;
 
-    double get_volume() const { return volume; }
+    double get_size() const;
 
-    double get_size() const { return size; }
+    double get_signed_volume() const;
 
-    double get_signed_volume() const { return signed_volume; }
+    double get_signed_size() const;
 
-    double get_signed_size() const { return signed_size; }
+    double get_directed_volume() const;
 
-    double get_directed_volume() const { return directed_volume; }
+    double get_directed_size() const;
 
-    double get_directed_size() const { return directed_size; }
+    double get_vwap() const;
 
-    double get_vwap() const { return vwap; }
+    long long get_startstamp() const;
 
-    long long get_startstamp() const { return startstamp; }
+    long long get_stopstamp() const;
 
-    long long get_stopstamp() const { return stopstamp; }
+    long long get_duration() const;
 
-    long long get_duration() const { return duration; }
+    unsigned int get_length() const;
 
-    unsigned int get_length() const { return length; }
-
-    void add_trade(const Trade &trade);
+    void add_trade(const Trade& trade);
 };
 
 #endif  // TRADE_LAB_BAR_H

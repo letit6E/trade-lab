@@ -4,7 +4,30 @@
 
 #include "bar.h"
 
-std::istream &operator>>(std::istream &in, Bar &bar) {
+Bar::Bar(double o, double c, double h, double l, double vol, double sz,
+         double s_vol, double s_sz, double d_vol, double d_sz, double vw,
+         long long ss, long long es, long long dr, unsigned int len)
+    : open(o),
+      close(c),
+      high(h),
+      low(l),
+      volume(vol),
+      size(sz),
+      signed_volume(s_vol),
+      signed_size(s_sz),
+      directed_volume(d_vol),
+      directed_size(d_sz),
+      vwap(vw),
+      startstamp(ss),
+      stopstamp(es),
+      duration(dr),
+      length(len) {
+    price_volume_sum = vw * len;
+}
+
+Bar::Bar() : Bar(-1., -1., -1., DBL_MAX, 0, 0, 0, 0, 0, 0, 0, -1., -1., 0, 0){};
+
+std::istream& operator>>(std::istream& in, Bar& bar) {
     char sep;
 
     if (!(in >> bar.open >> sep >> bar.close >> sep >> bar.high >> sep >>
@@ -20,7 +43,7 @@ std::istream &operator>>(std::istream &in, Bar &bar) {
     return in;
 }
 
-std::ostream &operator<<(std::ostream &out, const Bar &bar) {
+std::ostream& operator<<(std::ostream& out, const Bar& bar) {
     char sep = ',';
 
     out << bar.open << sep << bar.close << sep << bar.high << sep << bar.low
@@ -32,19 +55,19 @@ std::ostream &operator<<(std::ostream &out, const Bar &bar) {
     return out;
 }
 
-Bar::Bar(const std::vector<Trade> &trades) : Bar() {
+Bar::Bar(const std::vector<Trade>& trades) : Bar() {
     if (trades.empty()) {
         throw std::invalid_argument("Trades list cannot be empty");
     }
 
-    auto timestamp_comp = [](const Trade &a, const Trade &b) {
+    auto timestamp_comp = [](const Trade& a, const Trade& b) {
         return a.timestamp <= b.timestamp;
     };
     if (!std::is_sorted(trades.begin(), trades.end(), timestamp_comp)) {
         throw std::invalid_argument("Trades list must be sorted by timestamp");
     }
 
-    for (const Trade &trade : trades) {
+    for (const Trade& trade : trades) {
         add_trade(trade);
     }
 }
