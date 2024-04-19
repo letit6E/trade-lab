@@ -72,7 +72,7 @@ Bar::Bar(const std::vector<Trade>& trades) : Bar() {
     }
 }
 
-void Bar::add_trade(const Trade &trade) {
+void Bar::add_trade(const Trade& trade) {
     if (trade.timestamp < stopstamp) {
         throw std::invalid_argument(
             "Trade must be completed later than last trade in bar");

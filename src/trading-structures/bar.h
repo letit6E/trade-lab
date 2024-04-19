@@ -78,4 +78,31 @@ class Bar {
     void add_trade(const Trade& trade);
 };
 
+class BarBuilder {
+   private:
+    double open, close, high, low, volume, size, signed_volume, signed_size,
+        directed_volume, directed_size, vwap;
+    long long startstamp, stopstamp, duration;
+    unsigned int length;
+
+   public:
+    BarBuilder& set_open(double o);
+    BarBuilder& set_close(double c);
+    BarBuilder& set_high(double h);
+    BarBuilder& set_low(double l);
+    BarBuilder& set_volume(double vol);
+    BarBuilder& set_size(double sz);
+    BarBuilder& set_signed_volume(double s_vol);
+    BarBuilder& set_signed_size(double s_sz);
+    BarBuilder& set_directed_volume(double d_vol);
+    BarBuilder& set_directed_size(double d_sz);
+    BarBuilder& set_vwap(double vw);
+    BarBuilder& set_startstamp(long long ss);
+    BarBuilder& set_stopstamp(long long es);
+    BarBuilder& set_duration(long long dr);
+    BarBuilder& set_length(unsigned int len);
+
+    Bar build();
+};
+
 #endif  // TRADE_LAB_BAR_H
