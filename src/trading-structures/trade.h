@@ -13,10 +13,8 @@ class Trade {
     double volume;
     int direction;
 
-    Trade(long long t, double p, double s, double v, int d)
-        : timestamp(t), price(p), size(s), volume(v), direction(d) {}
-
-    Trade() : Trade(0, 0, 0, 0, 0) {}
+    Trade(long long t, double p, double s, double v, int d);
+    Trade();
 
     friend std::istream& operator>>(std::istream& is, Trade& tr);
     friend std::ostream& operator<<(std::ostream& os, const Trade& tr);
