@@ -2,7 +2,9 @@
 // Created by letit6E on 03.12.2023.
 //
 #include <trading-structures/trade.h>
+
 #include <fstream>
+
 #include "gtest/gtest.h"
 
 std::vector<Trade> read_from_file(const std::string& filename) {
@@ -87,4 +89,20 @@ TEST(TradeTest, OutputOperator) {
     Trade trade(1618920000, 100.5, 10, 1005, -1);
     os << trade;
     EXPECT_EQ(os.str(), "1618920000,100.5,10,1005,-1");
+}
+
+TEST(TradeTest, TradeBuilderTest) {
+    Trade trade = TradeBuilder()
+                      .set_timestamp(1618920000)
+                      .set_price(100.5)
+                      .set_size(10)
+                      .set_volume(1005)
+                      .set_direction(-1)
+                      .build();
+
+    EXPECT_EQ(trade.timestamp, 1618920000);
+    EXPECT_DOUBLE_EQ(trade.price, 100.5);
+    EXPECT_DOUBLE_EQ(trade.size, 10);
+    EXPECT_DOUBLE_EQ(trade.volume, 1005);
+    EXPECT_EQ(trade.direction, -1);
 }
