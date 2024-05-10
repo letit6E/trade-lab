@@ -1,6 +1,6 @@
 # Trade-lab
 
-High-performance tool for analyzing data from exchanges.
+Exchange data analysing tool.
 
 ## Building
 
