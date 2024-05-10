@@ -102,3 +102,102 @@ void Bar::add_trade(const Trade& trade) {
     stopstamp = trade.timestamp;
     duration = stopstamp - startstamp;
 }
+
+double Bar::get_open() const { return open; }
+
+double Bar::get_close() const { return close; }
+
+double Bar::get_high() const { return high; }
+
+double Bar::get_low() const { return low; }
+
+double Bar::get_volume() const { return volume; }
+
+double Bar::get_size() const { return size; }
+
+double Bar::get_signed_volume() const { return signed_volume; }
+
+double Bar::get_signed_size() const { return signed_size; }
+
+double Bar::get_directed_volume() const { return directed_volume; }
+
+double Bar::get_directed_size() const { return directed_size; }
+
+double Bar::get_vwap() const { return vwap; }
+
+long long Bar::get_startstamp() const { return startstamp; }
+
+long long Bar::get_stopstamp() const { return stopstamp; }
+
+long long Bar::get_duration() const { return duration; }
+
+unsigned int Bar::get_length() const { return length; }
+
+BarBuilder& BarBuilder::set_open(double o) {
+    open = o;
+    return *this;
+}
+
+BarBuilder& BarBuilder::set_close(double c) {
+    close = c;
+    return *this;
+}
+
+BarBuilder& BarBuilder::set_high(double h) {
+    high = h;
+    return *this;
+}
+BarBuilder& BarBuilder::set_low(double l) {
+    low = l;
+    return *this;
+}
+BarBuilder& BarBuilder::set_volume(double vol) {
+    volume = vol;
+    return *this;
+}
+BarBuilder& BarBuilder::set_size(double sz) {
+    size = sz;
+    return *this;
+}
+BarBuilder& BarBuilder::set_signed_volume(double s_vol) {
+    signed_volume = s_vol;
+    return *this;
+}
+BarBuilder& BarBuilder::set_signed_size(double s_sz) {
+    signed_size = s_sz;
+    return *this;
+}
+BarBuilder& BarBuilder::set_directed_volume(double d_vol) {
+    directed_volume = d_vol;
+    return *this;
+}
+BarBuilder& BarBuilder::set_directed_size(double d_sz) {
+    directed_size = d_sz;
+    return *this;
+}
+BarBuilder& BarBuilder::set_vwap(double vw) {
+    vwap = vw;
+    return *this;
+}
+BarBuilder& BarBuilder::set_startstamp(long long ss) {
+    startstamp = ss;
+    return *this;
+}
+BarBuilder& BarBuilder::set_stopstamp(long long es) {
+    stopstamp = es;
+    return *this;
+}
+BarBuilder& BarBuilder::set_duration(long long dr) {
+    duration = dr;
+    return *this;
+}
+BarBuilder& BarBuilder::set_length(unsigned int len) {
+    length = len;
+    return *this;
+}
+
+Bar BarBuilder::build() {
+    return Bar(open, close, high, low, volume, size, signed_volume, signed_size,
+               directed_volume, directed_size, vwap, startstamp, stopstamp,
+               duration, length);
+}
