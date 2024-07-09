@@ -5,8 +5,6 @@
 #ifndef TRADE_LAB_TIME_AGGREGATOR_H
 #define TRADE_LAB_TIME_AGGREGATOR_H
 
-#include "bar_aggregator.h"
-
 class TimeBarAggregator : public BarAggregator {
    private:
     long long bar_duration;

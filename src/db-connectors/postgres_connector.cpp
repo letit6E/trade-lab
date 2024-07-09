@@ -4,9 +4,15 @@
 
 #include "postgres_connector.h"
 
-PostgresConnector::PostgresConnector(const std::string &db_name,
-                                     const std::string &user_name,
-                                     const std::string &password) {
+#include <utility>
+
+PostgresConnector::PostgresConnector(std::string db_name, std::string user_name,
+                                     std::string password)
+    : db_name(std::move(db_name)),
+      user_name(std::move(user_name)),
+      password(std::move(password)) {}
+
+void PostgresConnector::connect() {
     connection = std::make_unique<pqxx::connection>(
         "dbname=" + db_name + " user=" + user_name + " password=" + password);
     if (!connection->is_open()) {
@@ -48,10 +54,11 @@ void PostgresConnector::insert_trades(const std::string &table_name,
         sql =
             "INSERT INTO trades (timestamp, price, size, volume, direction) "
             "VALUES (" +
-            std::to_string(trade.timestamp) + ", " +
-            std::to_string(trade.price) + ", " + std::to_string(trade.size) +
-            ", " + std::to_string(trade.volume) + ", " +
-            std::to_string(trade.direction) + ");";
+            std::to_string(trade.get_timestamp()) + ", " +
+            std::to_string(trade.get_price()) + ", " +
+            std::to_string(trade.get_size()) + ", " +
+            std::to_string(trade.get_volume()) + ", " +
+            std::to_string(trade.get_direction()) + ");";
 
         W.exec(sql);
     }

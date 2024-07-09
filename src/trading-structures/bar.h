@@ -102,7 +102,7 @@ class BarBuilder {
     BarBuilder& set_duration(long long dr);
     BarBuilder& set_length(unsigned int len);
 
-    Bar build();
+    Bar build() const;
 };
 
 #endif  // TRADE_LAB_BAR_H
