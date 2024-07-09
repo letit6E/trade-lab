@@ -1,45 +1,32 @@
 #include <fstream>
-#include <pqxx/pqxx>
+#include <iomanip>
 
-#include "collectors/exchange.h"
-#include "db-connectors/postgres_connector.h"
+#include "bar-aggregators/time_aggregator.h"
 
 int main() {
-    Exchange bybit{"bybit", "stream-testnet.bybit.com"};
+    std::string input_file = "trades.csv";
+    std::ifstream trades(input_file);
 
-    unsigned int count = 0, limit = 100;
-    std::string file_name = "trades.csv";
-    std::ofstream trades(file_name);
-    trades << std::fixed;
-    try {
-        bybit.init_webSocket("stream-testnet.bybit.com", "443",
-                             "/v5/public/linear");
-        if (bybit.is_socket_open()) {
-            std::string subscription_message =
-                R"({"op": "subscribe", "args":
-                                ["orderbook.50.BTCUSDT"]})";
-            bybit.write_Socket(subscription_message);
-        }
-        while (true) {
-            bybit.read_Socket();
-            auto vec = bybit.get_socket_trades();
-            for (const auto& tr : vec) {
-                ++count;
-                trades << tr << '\n';
-            }
-
-            bybit.buffer_clear();
-            if (count > limit) break;
-        }
-        bybit.webSocket_close();
-    } catch (std::exception const& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
+    // receiving
+    Trade trade;
+    long long duration = 1000;  // change this
+    TimeBarAggregator tba(duration);
+    while (trades >> trade) {
+        tba.receive(trade);
     }
-
-    //    PostgresConnector connector("postgres", "postgres", "postgres");
-    //    connector.insert_trades("trades", trades);
-
     trades.close();
+
+    // tba contains bars in queue
+
+    std::string output_file = "bars.csv";
+    std::ofstream bars(output_file);
+    bars << std::fixed;            // fixed-point notation
+    bars << std::setprecision(6);  // float precision (change this)
+    while (tba.ready()) {
+        bars << tba.publish() << '\n';
+    }
+    bars << tba.publish() << '\n';  // last unfinished bar (maybe don't use)
+    bars.close();
+
     return 0;
 }
