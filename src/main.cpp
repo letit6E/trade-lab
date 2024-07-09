@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-#include <chrono>
-#include <iostream>
-=======
 #include <fstream>
->>>>>>> temp
 #include <pqxx/pqxx>
 
 #include "collectors/exchange.h"
