@@ -10,7 +10,7 @@ int main() {
     unsigned int count = 0, limit = 100;
     std::string file_name = "trades.csv";
     std::ofstream trades(file_name);
-    trades << std::fixed << std::setprecision(20);
+    trades << std::fixed;
     try {
         bybit.init_webSocket("stream-testnet.bybit.com", "443",
                              "/v5/public/linear");
