@@ -5,7 +5,7 @@
 #ifndef TRADE_LAB_TICK_AGGREGATOR_H
 #define TRADE_LAB_TICK_AGGREGATOR_H
 
-#include "trading-structures/bar_aggregator.h"
+#include "bar_aggregator.h"
 
 class TickBarAggregator : public BarAggregator {
    private:

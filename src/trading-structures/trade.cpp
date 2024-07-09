@@ -30,16 +30,6 @@ Trade::Trade(long long t, double p, double s, double v, int d)
 
 Trade::Trade() : Trade(0, 0, 0, 0, 0) {}
 
-long long Trade::get_timestamp() const { return timestamp; }
-
-double Trade::get_price() const { return price; }
-
-double Trade::get_size() const { return size; }
-
-double Trade::get_volume() const { return volume; }
-
-int Trade::get_direction() const { return direction; }
-
 TradeBuilder &TradeBuilder::set_timestamp(long long int ts) {
     timestamp = ts;
     return *this;

@@ -20,8 +20,6 @@ int main() {
                                 ["orderbook.50.BTCUSDT"]})";
             bybit.write_Socket(subscription_message);
         }
-
-        auto start = std::chrono::high_resolution_clock::now();
         while (true) {
             bybit.read_Socket();
             auto vec = bybit.get_socket_trades();
@@ -33,9 +31,6 @@ int main() {
             bybit.buffer_clear();
             if (count > limit) break;
         }
-        auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> duration = end - start;
-        std::cout << trades.size() / duration.count() << std::endl;
         bybit.webSocket_close();
     } catch (std::exception const& e) {
         std::cerr << "Error: " << e.what() << std::endl;

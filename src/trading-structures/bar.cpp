@@ -47,11 +47,10 @@ std::ostream& operator<<(std::ostream& out, const Bar& bar) {
     char sep = ',';
 
     out << bar.open << sep << bar.close << sep << bar.high << sep << bar.low
-        << sep << bar.get_volume() << sep << bar.get_size() << sep
-        << bar.signed_volume << sep << bar.signed_size << sep
-        << bar.directed_volume << sep << bar.directed_size << sep << bar.vwap
-        << sep << bar.startstamp << sep << bar.stopstamp << sep << bar.duration
-        << sep << bar.length;
+        << sep << bar.volume << sep << bar.size << sep << bar.signed_volume
+        << sep << bar.signed_size << sep << bar.directed_volume << sep
+        << bar.directed_size << sep << bar.vwap << sep << bar.startstamp << sep
+        << bar.stopstamp << sep << bar.duration << sep << bar.length;
 
     return out;
 }
@@ -62,7 +61,7 @@ Bar::Bar(const std::vector<Trade>& trades) : Bar() {
     }
 
     auto timestamp_comp = [](const Trade& a, const Trade& b) {
-        return a.get_timestamp() <= b.get_timestamp();
+        return a.timestamp <= b.timestamp;
     };
     if (!std::is_sorted(trades.begin(), trades.end(), timestamp_comp)) {
         throw std::invalid_argument("Trades list must be sorted by timestamp");
@@ -74,33 +73,33 @@ Bar::Bar(const std::vector<Trade>& trades) : Bar() {
 }
 
 void Bar::add_trade(const Trade& trade) {
-    if (trade.get_timestamp() < stopstamp) {
+    if (trade.timestamp < stopstamp) {
         throw std::invalid_argument(
             "Trade must be completed later than last trade in bar");
     }
 
-    if (close >= 0 && trade.get_price() != close) {
-        int sign = (trade.get_price() > close) ? 1 : -1;
-        signed_volume += sign * trade.get_volume();
-        signed_size += sign * trade.get_size();
+    if (close >= 0 && trade.price != close) {
+        int sign = (trade.price > close) ? 1 : -1;
+        signed_volume += sign * trade.volume;
+        signed_size += sign * trade.size;
     }
     if (open < 0) {
-        open = trade.get_price();
+        open = trade.price;
     }
-    close = trade.get_price();
-    volume += trade.get_volume();
-    size += trade.get_size();
-    price_volume_sum += trade.get_price() * trade.get_volume();
-    directed_volume += trade.get_direction() * trade.get_volume();
-    directed_size += trade.get_direction() * trade.get_size();
-    high = std::max(high, trade.get_price());
-    low = std::min(low, trade.get_price());
+    close = trade.price;
+    volume += trade.volume;
+    size += trade.size;
+    price_volume_sum += trade.price * trade.volume;
+    directed_volume += trade.direction * trade.volume;
+    directed_size += trade.direction * trade.size;
+    high = std::max(high, trade.price);
+    low = std::min(low, trade.price);
     ++length;
     vwap = price_volume_sum / length;
     if (startstamp < 0) {
-        startstamp = trade.get_timestamp();
+        startstamp = trade.timestamp;
     }
-    stopstamp = trade.get_timestamp();
+    stopstamp = trade.timestamp;
     duration = stopstamp - startstamp;
 }
 
@@ -197,10 +196,8 @@ BarBuilder& BarBuilder::set_length(unsigned int len) {
     return *this;
 }
 
-Bar BarBuilder::build() const {
-    return {open,          close,       high,
-            low,           volume,      size,
-            signed_volume, signed_size, directed_volume,
-            directed_size, vwap,        startstamp,
-            stopstamp,     duration,    length};
+Bar BarBuilder::build() {
+    return Bar(open, close, high, low, volume, size, signed_volume, signed_size,
+               directed_volume, directed_size, vwap, startstamp, stopstamp,
+               duration, length);
 }

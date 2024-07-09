@@ -8,12 +8,12 @@ TimeBarAggregator::TimeBarAggregator(long long duration)
     : bar_duration(duration), last_timestamp(-1) {}
 
 void TimeBarAggregator::receive(const Trade &trade) {
-    if (trade.get_timestamp() < last_timestamp) {
+    if (trade.timestamp < last_timestamp) {
         throw std::invalid_argument(
             "Bar aggregator receives trades only increasing over timestamp");
     }
-    last_timestamp = trade.get_timestamp();
-    if (trade.get_timestamp() > cur_bar.get_startstamp() + bar_duration &&
+    last_timestamp = trade.timestamp;
+    if (trade.timestamp > cur_bar.get_startstamp() + bar_duration &&
         cur_bar.get_open() > 0) {
         if (cur_bar.get_open() <= 0) {
             cur_bar = last_bar;

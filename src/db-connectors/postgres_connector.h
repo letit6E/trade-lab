@@ -11,21 +11,16 @@
 #include <string>
 #include <vector>
 
-#include "db_connector.h"
-
-class PostgresConnector : DataBaseConnector {
+class PostgresConnector {
    public:
-    PostgresConnector(std::string db_name, std::string user_name,
-                      std::string password);
-
-    void connect() override;
+    PostgresConnector(const std::string& db_name, const std::string& user_name,
+                      const std::string& password);
 
     void insert_trades(const std::string& table_name,
-                       const std::vector<Trade>& trades) override;
+                       const std::vector<Trade>& trades);
 
    private:
     std::unique_ptr<pqxx::connection> connection;
-    std::string db_name, user_name, password;
 };
 
 #endif  // TRADE_LAB_POSTGRES_CONNECTOR_H

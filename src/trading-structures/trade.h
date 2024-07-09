@@ -6,26 +6,15 @@
 #include <string>
 
 class Trade {
-   private:
+   public:
     long long timestamp;  // Unix timestamp
     double price;
     double size;
     double volume;
     int direction;
 
-   public:
     Trade(long long t, double p, double s, double v, int d);
     Trade();
-
-    long long get_timestamp() const;
-
-    double get_price() const;
-
-    double get_size() const;
-
-    double get_volume() const;
-
-    int get_direction() const;
 
     friend std::istream& operator>>(std::istream& is, Trade& tr);
     friend std::ostream& operator<<(std::ostream& os, const Trade& tr);

@@ -46,15 +46,12 @@ class Exchange {
 
     void webSocket_close();
 
-    beast::flat_buffer buffer;
-
-    simdjson::dom::parser parser_json;
-
    private:
     void add_socket_trades(simdjson::dom::element json, std::vector<Trade> &vec,
                            int direction, int64_t timestamp);
 
     std::unordered_map<std::string, double> bid_buffer, ask_buffer;
+    simdjson::dom::parser parser_json;
     std::string m_name;
     net::io_context ioc;
     ssl::context ctx{ssl::context::tlsv12_client};
@@ -62,6 +59,7 @@ class Exchange {
     Stream stream{ioc, ctx};
     std::string m_web_socket_host;
     std::string m_web_socket_port;
+    beast::flat_buffer buffer;
     net::io_context ioc_webSocket;
     ssl::context ctx_webSocket{ssl::context::tlsv12_client};
     tcp::resolver resolver_webSocket{ioc_webSocket};

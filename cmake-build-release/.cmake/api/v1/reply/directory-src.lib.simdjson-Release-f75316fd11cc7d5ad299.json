@@ -1,0 +1,118 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"src/lib/simdjson/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 158,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 164,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 186,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 194,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 228,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "simdjson_Development",
+			"destination" : "include",
+			"paths" : 
+			[
+				"src/lib/simdjson/singleheader/simdjson.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "simdjson_Development",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"src/lib/simdjson/libsimdjson.a"
+			],
+			"targetId" : "simdjson::@3aaa6f817366beb6d024",
+			"targetIndex" : 10,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "simdjson_Development",
+			"destination" : "lib/cmake/simdjson",
+			"paths" : 
+			[
+				"cmake-build-release/src/lib/simdjson/simdjson-config.cmake",
+				"cmake-build-release/src/lib/simdjson/simdjson-config-version.cmake"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "simdjson_Development",
+			"destination" : "lib/cmake/simdjson",
+			"exportName" : "simdjsonTargets",
+			"exportTargets" : 
+			[
+				{
+					"id" : "simdjson::@3aaa6f817366beb6d024",
+					"index" : 10
+				}
+			],
+			"paths" : 
+			[
+				"src/lib/simdjson/CMakeFiles/Export/lib/cmake/simdjson/simdjsonTargets.cmake"
+			],
+			"type" : "export"
+		},
+		{
+			"backtrace" : 5,
+			"component" : "Unspecified",
+			"destination" : "lib/pkgconfig",
+			"paths" : 
+			[
+				"cmake-build-release/src/lib/simdjson/simdjson.pc"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "src/lib/simdjson",
+		"source" : "src/lib/simdjson"
+	}
+}
