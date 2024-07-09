@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 #include <chrono>
 #include <iostream>
+=======
+#include <fstream>
+>>>>>>> temp
 #include <pqxx/pqxx>
 
 #include "collectors/exchange.h"
@@ -8,7 +12,10 @@
 int main() {
     Exchange bybit{"bybit", "stream-testnet.bybit.com"};
 
-    std::vector<Trade> trades;
+    unsigned int count = 0, limit = 100;
+    std::string file_name = "trades.csv";
+    std::ofstream trades(file_name);
+    trades << std::fixed << std::setprecision(20);
     try {
         bybit.init_webSocket("stream-testnet.bybit.com", "443",
                              "/v5/public/linear");
@@ -24,11 +31,12 @@ int main() {
             bybit.read_Socket();
             auto vec = bybit.get_socket_trades();
             for (const auto& tr : vec) {
-                trades.push_back(tr);
+                ++count;
+                trades << tr << '\n';
             }
 
             bybit.buffer_clear();
-            if (trades.size() > 100) break;
+            if (count > limit) break;
         }
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> duration = end - start;
@@ -42,5 +50,6 @@ int main() {
     //    PostgresConnector connector("postgres", "postgres", "postgres");
     //    connector.insert_trades("trades", trades);
 
+    trades.close();
     return 0;
 }
