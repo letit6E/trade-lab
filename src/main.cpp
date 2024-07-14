@@ -9,7 +9,7 @@ int main() {
 
     // receiving
     Trade trade;
-    long long duration = 1000;  // change this
+    long long duration = 120000;  // change this
     TimeBarAggregator tba(duration);
     while (trades >> trade) {
         tba.receive(trade);
