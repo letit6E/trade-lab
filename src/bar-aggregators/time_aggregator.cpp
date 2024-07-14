@@ -16,7 +16,7 @@ void TimeBarAggregator::receive(const Trade &trade) {
     if (trade.timestamp > cur_bar.get_startstamp() + bar_duration &&
         cur_bar.get_open() > 0) {
         if (cur_bar.get_open() <= 0) {
-            cur_bar = last_bar;
+            cur_bar = Bar(last_bar.get_close(), last_bar.get_close(), last_bar.get_close(), last_bar.get_close(), 0, 0, 0, 0, 0, 0, last_bar.get_close(), last_bar.get_stopstamp(), last_timestamp, last_timestamp - last_bar.get_stopstamp(), 0);
         }
         bar_queue.push(cur_bar);
         last_bar = cur_bar;
