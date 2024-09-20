@@ -48,10 +48,11 @@ void PostgresConnector::insert_trades(const std::string &table_name,
         sql =
             "INSERT INTO trades (timestamp, price, size, volume, direction) "
             "VALUES (" +
-            std::to_string(trade.timestamp) + ", " +
-            std::to_string(trade.price) + ", " + std::to_string(trade.size) +
-            ", " + std::to_string(trade.volume) + ", " +
-            std::to_string(trade.direction) + ");";
+            std::to_string(trade.get_timestamp()) + ", " +
+            std::to_string(trade.get_price()) + ", " +
+            std::to_string(trade.get_size()) + ", " +
+            std::to_string(trade.get_volume()) + ", " +
+            std::to_string(trade.get_direction()) + ");";
 
         W.exec(sql);
     }
