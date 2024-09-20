@@ -61,7 +61,7 @@ Bar::Bar(const std::vector<Trade>& trades) : Bar() {
     }
 
     auto timestamp_comp = [](const Trade& a, const Trade& b) {
-        return a.timestamp <= b.timestamp;
+        return a.get_timestamp() <= b.get_timestamp();
     };
     if (!std::is_sorted(trades.begin(), trades.end(), timestamp_comp)) {
         throw std::invalid_argument("Trades list must be sorted by timestamp");
@@ -73,33 +73,33 @@ Bar::Bar(const std::vector<Trade>& trades) : Bar() {
 }
 
 void Bar::add_trade(const Trade& trade) {
-    if (trade.timestamp < stopstamp) {
+    if (trade.get_timestamp() < stopstamp) {
         throw std::invalid_argument(
             "Trade must be completed later than last trade in bar");
     }
 
-    if (close >= 0 && trade.price != close) {
-        int sign = (trade.price > close) ? 1 : -1;
-        signed_volume += sign * trade.volume;
-        signed_size += sign * trade.size;
+    if (close >= 0 && trade.get_price() != close) {
+        int sign = (trade.get_price() > close) ? 1 : -1;
+        signed_volume += sign * trade.get_volume();
+        signed_size += sign * trade.get_size();
     }
     if (open < 0) {
-        open = trade.price;
+        open = trade.get_price();
     }
-    close = trade.price;
-    volume += trade.volume;
-    size += trade.size;
-    price_volume_sum += trade.price * trade.volume;
-    directed_volume += trade.direction * trade.volume;
-    directed_size += trade.direction * trade.size;
-    high = std::max(high, trade.price);
-    low = std::min(low, trade.price);
+    close = trade.get_price();
+    volume += trade.get_volume();
+    size += trade.get_size();
+    price_volume_sum += trade.get_price() * trade.get_volume();
+    directed_volume += trade.get_direction() * trade.get_volume();
+    directed_size += trade.get_direction() * trade.get_size();
+    high = std::max(high, trade.get_price());
+    low = std::min(low, trade.get_price());
     ++length;
     vwap = price_volume_sum / length;
     if (startstamp < 0) {
-        startstamp = trade.timestamp;
+        startstamp = trade.get_timestamp();
     }
-    stopstamp = trade.timestamp;
+    stopstamp = trade.get_timestamp();
     duration = stopstamp - startstamp;
 }
 
