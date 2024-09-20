@@ -3,18 +3,24 @@
 //
 #include "trade.h"
 
+long long Trade::get_timestamp() const { return timestamp; }
+double Trade::get_price() const { return price; }
+double Trade::get_size() const { return size; }
+double Trade::get_volume() const { return volume; }
+int Trade::get_direction() const { return direction; }
+
 std::istream &operator>>(std::istream &is, Trade &tr) {
     std::string line;
     std::getline(is, line);
     std::istringstream iss(line);
     char sep;
 
-    if (!(iss >> tr.timestamp >> sep >> tr.price >> sep >>
-          tr.size >> sep >> tr.direction)) {
+    if (!(iss >> tr.timestamp >> sep >> tr.price >> sep >> tr.size >> sep >>
+          tr.direction)) {
         is.setstate(std::ios::failbit);
     } else {
-		tr.volume = tr.price * tr.size;
-	}
+        tr.volume = tr.price * tr.size;
+    }
 
     return is;
 }
