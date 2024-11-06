@@ -16,10 +16,8 @@ std::istream &operator>>(std::istream &is, Trade &tr) {
     char sep;
 
     if (!(iss >> tr.timestamp >> sep >> tr.price >> sep >> tr.size >> sep >>
-          tr.direction)) {
+          tr.volume >> sep >> tr.direction)) {
         is.setstate(std::ios::failbit);
-    } else {
-        tr.volume = tr.price * tr.size;
     }
 
     return is;
