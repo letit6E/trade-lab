@@ -1,6 +1,6 @@
 # Trade-lab
 
-Exchange data analysing tool.
+Exchange data aggregation tool.
 
 ## Building
 
