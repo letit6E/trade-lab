@@ -3,7 +3,9 @@
 //
 
 #include <gtest/gtest.h>
+
 #include "bar-aggregators/time_aggregator.h"
+
 
 TEST(TimeBarAggregatorTest, ReceiveTradeWithEarlierTimestamp) {
     TimeBarAggregator aggregator(1000);
@@ -58,8 +60,10 @@ TEST(TimeBarAggregatorTest, ReadyWithoutAvailableBar) {
 }
 
 TEST(TimeBarAggregatorTest, PublishWithoutAvailableBar) {
-    TimeBarAggregator aggregator(1000); // Создаем агрегатор с временным интервалом 1000 миллисекунд
-    Trade trade1(1000, 10.0, 1.0, 1.0, 1); // Первая сделка с меткой времени 1000
+    TimeBarAggregator aggregator(
+        1000);  // Создаем агрегатор с временным интервалом 1000 миллисекунд
+    Trade trade1(1000, 10.0, 1.0, 1.0,
+                 1);  // Первая сделка с меткой времени 1000
 
     aggregator.receive(trade1);
 

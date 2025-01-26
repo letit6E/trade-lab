@@ -3,7 +3,9 @@
 //
 
 #include <gtest/gtest.h>
+
 #include "bar-aggregators/tick_aggregator.h"
+
 
 TEST(TickBarAggregatorTest, ReceiveTradeWithEarlierTimestamp) {
     TickBarAggregator aggregator(1000);
@@ -16,7 +18,7 @@ TEST(TickBarAggregatorTest, ReceiveTradeWithEarlierTimestamp) {
 
 // Тестирование функции receive()
 TEST(TickBarAggregatorTest, ReceiveTrade) {
-    TickBarAggregator aggregator(5); // Создаем агрегатор с длиной бара 5
+    TickBarAggregator aggregator(5);  // Создаем агрегатор с длиной бара 5
     Trade trade1(1, 10.0, 1.0, 1.0, 1);
     Trade trade2(2, 11.0, 2.0, 2.0, 1);
     Trade trade3(3, 12.0, 3.0, 3.0, 1);
@@ -51,7 +53,7 @@ TEST(TickBarAggregatorTest, ReceiveTrade) {
 
 // Тестирование функции ready()
 TEST(TickBarAggregatorTest, Ready) {
-    TickBarAggregator aggregator(3); // Создаем агрегатор с длиной бара 3
+    TickBarAggregator aggregator(3);  // Создаем агрегатор с длиной бара 3
     Trade trade1(1, 10.0, 1.0, 1.0, 1);
     Trade trade2(2, 11.0, 2.0, 2.0, 1);
     Trade trade3(3, 12.0, 3.0, 3.0, 1);
@@ -132,7 +134,7 @@ TEST(TickBarAggregatorTest, Publish) {
 
 // Тестирование исключения при попытке публикации, когда нет готовых баров
 TEST(TickBarAggregatorTest, PublishException) {
-    TickBarAggregator aggregator(2); // Создаем агрегатор с длиной бара 2
+    TickBarAggregator aggregator(2);  // Создаем агрегатор с длиной бара 2
 
     // Проверяем, что выбрасывается исключение при попытке публикации
     EXPECT_THROW(aggregator.publish(), std::runtime_error);
