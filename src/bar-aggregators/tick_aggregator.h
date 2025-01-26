@@ -17,10 +17,6 @@ class TickBarAggregator : public BarAggregator {
     explicit TickBarAggregator(long long bar_length);
 
     void receive(const Trade &trade) override;
-
-    bool ready() override;
-
-    Bar publish() override;
 };
 
 #endif  // TRADE_LAB_TICK_AGGREGATOR_H

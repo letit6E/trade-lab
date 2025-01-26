@@ -20,22 +20,3 @@ void VolumeBarAggregator::receive(const Trade &trade) {
     }
     cur_bar.add_trade(trade);
 }
-
-bool VolumeBarAggregator::ready() { return !bar_queue.empty(); }
-
-Bar VolumeBarAggregator::publish() {
-    if (ready()) {
-        Bar published_bar = bar_queue.front();
-        bar_queue.pop();
-        return published_bar;
-    }
-
-    if (cur_bar.get_open() >
-        0) {  // user don't check ready(), force publish cur_bar
-        Bar result = cur_bar;
-        cur_bar = Bar();
-        return result;
-    }
-
-    throw std::runtime_error("There are no ready bars to publish.");
-}

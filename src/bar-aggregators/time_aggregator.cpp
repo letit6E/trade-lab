@@ -28,22 +28,3 @@ void TimeBarAggregator::receive(const Trade &trade) {
     }
     cur_bar.add_trade(trade);
 }
-
-bool TimeBarAggregator::ready() { return !bar_queue.empty(); }
-
-Bar TimeBarAggregator::publish() {
-    if (ready()) {
-        Bar published_bar = bar_queue.front();
-        bar_queue.pop();
-        return published_bar;
-    }
-
-    if (cur_bar.get_open() >
-        0) {  // user don't check ready(), force publish cur_bar
-        last_bar = cur_bar;
-        cur_bar = Bar();
-        return last_bar;
-    }
-
-    throw std::runtime_error("There are no ready bars to publish.");
-}

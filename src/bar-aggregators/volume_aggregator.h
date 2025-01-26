@@ -18,10 +18,6 @@ class VolumeBarAggregator : public BarAggregator {
     explicit VolumeBarAggregator(double volume_duration);
 
     void receive(const Trade &trade) override;
-
-    bool ready() override;
-
-    Bar publish() override;
 };
 
 #endif  // TRADE_LAB_VOLUME_AGGREGATOR_H

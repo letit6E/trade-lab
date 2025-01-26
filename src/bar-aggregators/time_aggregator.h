@@ -18,10 +18,6 @@ class TimeBarAggregator : public BarAggregator {
     explicit TimeBarAggregator(long long duration);
 
     void receive(const Trade &trade) override;
-
-    bool ready() override;
-
-    Bar publish() override;
 };
 
 #endif  // TRADE_LAB_TIME_AGGREGATOR_H

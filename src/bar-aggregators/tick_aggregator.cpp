@@ -19,23 +19,3 @@ void TickBarAggregator::receive(const Trade &trade) {
     }
     cur_bar.add_trade(trade);
 }
-
-bool TickBarAggregator::ready() {
-    return !bar_queue.empty() || cur_bar.get_length() == bar_length;
-}
-
-Bar TickBarAggregator::publish() {
-    if (ready()) {
-        Bar published_bar;
-        if (bar_queue.empty()) {
-            published_bar = cur_bar;
-            cur_bar = Bar();
-        } else {
-            published_bar = bar_queue.front();
-            bar_queue.pop();
-        }
-        return published_bar;
-    } else {
-        throw std::runtime_error("There are no ready bars to publish.");
-    }
-}
