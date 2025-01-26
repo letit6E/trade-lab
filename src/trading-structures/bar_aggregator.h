@@ -26,9 +26,9 @@ class BarAggregator {
             Bar published_bar = bar_queue.front();
             bar_queue.pop();
             return published_bar;
-        } else {
-            throw std::runtime_error("There are no ready bars to publish.");
         }
+
+        throw std::runtime_error("There are no ready bars to publish.");
     }
 
     template <typename T>
