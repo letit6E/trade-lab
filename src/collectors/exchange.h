@@ -46,6 +46,8 @@ class Exchange {
 
     void webSocket_close();
 
+    std::string get_buffer_data();
+
    private:
     void add_socket_trades(simdjson::dom::element json, std::vector<Trade> &vec,
                            int direction, int64_t timestamp);
