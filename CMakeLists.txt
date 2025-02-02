@@ -2,10 +2,12 @@ cmake_minimum_required(VERSION 3.2)
 project(trade-lab)
 
 option(CodeCoverage "CodeCoverage" ON)
-set(CMAKE_CXX_FLAGS "-std=c++20 -Wno-deprecated-register ${CMAKE_CXX_FLAGS}")
-set(CMAKE_CXX_FLAGS_DEBUG "-std=c++20 -Wno-deprecated-register -O0 -g -fprofile-arcs -ftest-coverage ${CMAKE_CXX_FLAGS_DEBUG}")
+set(CMAKE_CXX_FLAGS "-std=c++17 -Wno-deprecated-register -fPIC ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS_DEBUG "-std=c++17 -Wno-deprecated-register -O0 -g  -fprofile-arcs -ftest-coverage ${CMAKE_CXX_FLAGS_DEBUG}")
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules/)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
+
+find_package(pybind11 REQUIRED)
 
 add_subdirectory(src)
 add_subdirectory(test)
